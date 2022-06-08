@@ -14,7 +14,7 @@
   <%
 	Date now = new Date();
   	SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
-  %>
+  %> 
 </head>
 
 <body>
