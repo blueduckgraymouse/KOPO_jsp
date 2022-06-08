@@ -34,7 +34,7 @@
   <div class="container">
     <div class="text-center">
       <h3>Welcome to Web market!</h3>
-      현재 접속 시간 : <%= format.format(now) %>
+      현재 접속 시간 : <%= format.format(now) %> 
     </div>
   </div>
   
