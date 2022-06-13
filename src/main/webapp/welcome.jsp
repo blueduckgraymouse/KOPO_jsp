@@ -18,13 +18,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">  <!-- jumnotron -->
-    <div class="container">
-      <div class="navbar-header">
-        <a href="" class="navbar-brand" href="./welcome.jsp">Home</a>
-      </div>
-    </div>
-  </nav>
+  <jsp:include page="menu.jsp"></jsp:include>
 
   <div class="p-5 bg-primary text-white">
     <div class="container">
@@ -38,9 +32,7 @@
     </div>
   </div>
   
-  <footer class="container">
-    <p>&copy;WebMarket</p>
-  </footer>
+  <jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>
