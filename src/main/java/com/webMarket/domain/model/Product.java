@@ -8,46 +8,20 @@ import java.util.Objects;
 // 3. getter / setter
 // 4. toString()
 // 5. 추가) equals / haseCode 재정의 (오버라이드)
-public class Product implements Serializable {
-		/* equals와 == 비교 확인 */
-		public static void main(String[] args) {
-			String a = "apple";
-			//String b = "b";
-			String b = new String("apple");
-			String c = new String("apple");
-			System.out.println(a.equals(b));	// true	, 변수 a와 b가 참조하는 데이터의 내용이 같은가?
-			System.out.println(a.equals(c));	// true , 변수 a와 c가 참조하는 데이터의 내용이 같은가?
-			System.out.println(a==b);			// false , 변수 a와 변수 b가 같은 데이터(주소)를 참조하는가?
-			System.out.println(a==c);		 	// false , 변수 a와 변수 b가 같은 데이터(주소)를 참조하는가?
-			System.out.println(b==c);		 	// false , 변수 a와 변수 b가 같은 데이터(주소)를 참조하는가?
-			System.out.println(a.hashCode());
-			System.out.println(b.hashCode());
-			System.out.println(c.hashCode());
-			System.out.println(a == b);			
-			System.out.println(a == c);			
-			System.out.println(b == c);			
-			
-			Product product1 = new Product("12", "11", 11);
-			Product product2 = new Product("12", "11", 11);
-			Product product3 = product2;
-			System.out.println(product1.hashCode());
-			System.out.println(product2.hashCode());
-//			System.out.println(product1 == product2);						// false, 데이터 영역 비교
-//			System.out.println(product1.hashCode() == product2.hashCode());	// true, 힙 영역 비교 => 원래 객체 내 데이터가 일치하면 hashcode가 같은건가??
-//			System.out.println(product2 == product3);						// false, 데이터 영역 비교
-//			System.out.println(product2.hashCode() == product3.hashCode());	// true, 힙 영역 비교 => 원래 객체 내 데이터가 일치하면 hashcode가 같은건가??
-//			System.out.println(product1.equals(product2));
-//			
-//			product1.setId("13");		
-//			System.out.println(product1.hashCode());
-//			System.out.println(product2.hashCode());
-//			System.out.println(product1.hashCode() == product2.hashCode());	// false, 힙 영역 비교
-//			
-//			product1.setId("12");
-//			System.out.println(product1.equals(product2));	// true, override를 통해서 내용비교를 통한 일치여부 메서드로 바꿔줬으므로
-//			System.out.println(product1.hashCode() == product2.hashCode());	// true, 앞의 equals메서드에서 비교를 하며 같으면 hashcode를 일치시키는 코드가 존재했으므로 -> 라고 필기한거 같은데 위에서 그냥 객쳋 내 데이터가 같으면 hashcode가 일치해버림
-//			System.out.println(product1 == product2);	// false, stack 영역에 존재하는 "product1", "product2"라는 객체 명을 비교하는 것이므로  
-		}
+public class Product implements Serializable {		//	Serializable implements 생략 가능
+	//    public static void main(String[] args) {
+	//        Product product = new Product("33", "33", 11);
+	//        System.out.println(product.hashCode());
+	//
+	//        Product product2 = new Product("33", "33", 11);
+	//        System.out.println(product2.hashCode());
+	//
+	//        Object object = new Product("33", "33", 11);
+	//
+	//        System.out.println(product.equals(product2)); // true
+	//        System.out.println(product.hashCode() == product2.hashCode()); // true
+	//        System.out.println(product == product2); // false
+	//    }
 	private String id;	// 상품 아이디
 	private String name;		// 상품 명
 	private int unitPrice;		// 상품 가격
@@ -56,9 +30,6 @@ public class Product implements Serializable {
 	private String category;	// 분류
 	private long unitsInStock;	// 재고 수
 	private String condition;	// 신상품 or 중고품 or 재생품
-	
-	public Product() {
-	}
 	
 	public Product(String id, String name, int unitPrice) {
 		super();
@@ -124,24 +95,23 @@ public class Product implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode() {		// override된 hashCode()는 같은 필드값으로 구성된 모든 Product 객체의 hashCode를 동일한 hashcode로 재정의
 		return Objects.hash(category, condition, description, manufacturer, name, id, unitPrice, unitsInStock);
 	}
 
-//	@Override
-//	public boolean equals(Object obj) {			// 기존에 동일한 필드값의 두 객체지만 hashcode가 달랐지만
-//		if (this == obj)						// equals메서드를 거치면서 hashcode가 동일하게 수정되어 진다.
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Product other = (Product) obj;
-//		return Objects.equals(category, other.category) && Objects.equals(condition, other.condition)
-//				&& Objects.equals(description, other.description) && Objects.equals(manufacturer, other.manufacturer)
-//				&& Objects.equals(name, other.name) && Objects.equals(id, other.id)
-//				&& unitPrice == other.unitPrice && unitsInStock == other.unitsInStock;
-//	}
-	
+	@Override
+	public boolean equals(Object obj) {			
+		if (this == obj)						
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return Objects.equals(category, other.category) && Objects.equals(condition, other.condition)
+				&& Objects.equals(description, other.description) && Objects.equals(manufacturer, other.manufacturer)
+				&& Objects.equals(name, other.name) && Objects.equals(id, other.id)
+				&& unitPrice == other.unitPrice && unitsInStock == other.unitsInStock;
+	}
 	
 }
