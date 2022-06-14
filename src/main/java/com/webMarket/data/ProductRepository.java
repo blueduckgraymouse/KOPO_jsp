@@ -11,7 +11,17 @@ import com.webMarket.domain.model.Product;
 public class ProductRepository {
 	private List<Product> products = new ArrayList<>();	
 	
-	public ProductRepository() {
+	// 싱글턴 패턴
+	// 1. static 인스턴스 준비
+	// 2. static 메서드로 인스턴스 리턴 (getInstance() 이름을 주로 씀)
+	// 3. 생성자 막기 (private)
+	private static ProductRepository instance = new ProductRepository();
+	
+	public static ProductRepository getInstatnce() {
+		return instance;
+	}
+	
+	private ProductRepository() {		// 생성자를 private로 변경, static인 instance를 이용하도록 유도 -> "singleton pattern"
 		Product phone = new Product("P1234", "iPhone 6s", 800000);
 		phone.setDescription("4.7-inch, 1334X750 Renina HD display, 8-megapixel iSight Camera");
 		phone.setCategory("Smart Phone");
@@ -44,6 +54,19 @@ public class ProductRepository {
 		return products;
 	}
 	
+	
+//	public Product getProductById(String id) {
+//		Product productById = null;
+//
+//		for (int i = 0; i < products.size(); i++) {
+//			Product product = products.get(i);
+//			if (product != null && product.getId() != null && product.getId().equals(id)) {
+//				productById = product;
+//				break;
+//			}
+//		}
+//	}
+//	=>	
 	public Product getProductById(String id) {
 		// List를 stream(데이터의 흐름)으로 변환
 		return products.stream()
@@ -51,6 +74,13 @@ public class ProductRepository {
 			.findFirst()	// 첫번쨰
 			.get();			// 얻어
 	}
+	
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+
+	
+	
 	
 //	public static void main(String[] args) {
 //        // 삽입, 삭제가 빈번할 때 항상 동일 성능, but ArrayList보다 검색이 느려
