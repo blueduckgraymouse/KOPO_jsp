@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.webMarket.domain.model.Product"%>
+<%@ page import="com.webMarket.data.ProductRepository"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +16,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   
   <jsp:useBean id="repository" class="com.webMarket.data.ProductRepository" scope="session"></jsp:useBean>
-			<!-- new연산자를 이용한 객체 생성과 비슷한 동작, scope는 lifeCycle 지정 -->
+		<!-- new연산자를 이용한 객체 생성과 비슷한 동작, scope는 lifeCycle 지정 -->
+		<!-- 스코프 설정에 따라 해당 빈의 라이브사이클이 정해진다. 따라서 new연산자를 이용할 떄는 매 페이지 로드마다 -->
+		<!-- 객체를 생성하지만 jsp useBean을 사용하면 매번 객체를 생성하지 않도록 설계할 수 있다.  -->
 </head>
 
 <body>
