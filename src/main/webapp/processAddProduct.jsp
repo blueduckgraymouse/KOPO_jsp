@@ -16,6 +16,11 @@
 	String unitsInStock = request.getParameter("unitsInStock");
 	String condition = request.getParameter("condition");
 
+	// getInstance() 메서드는 static
+	// tomcat서버가 서버 메모리에 올라가면 instance는 자동으로 할당되고 서버가 내려갈 때까지 생명주기를 유지
+	// instance 객체에 add한 상품 정보는 서버가 내려갈 때까지 유지
+	// 서버가 내려가면 기존에 ProductRepository 내 저장된 데이터로 초기화되는 것처럼 동작한다.
+	// 또한 instance 객체는 서버의 메모리에 존재하므로 추가한 상품은 모든 클라이언트에 대해 동기화되어 보여진다.
  	ProductRepository dao = ProductRepository.getInstance();
 
 	Product newProduct = new Product();
