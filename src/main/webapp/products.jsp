@@ -31,6 +31,12 @@
   <div class="container">
     <div class="row" align="center">
       <%
+      	/* 세션 실습 */
+      	//String name = (String)session.getAttribute("name");
+      	//String age = (String)session.getAttribute("age");
+      	//out.println(name + "," + age);
+      	out.println(session.getAttribute("foods"));
+      	
       	ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
         List<Product> products = repository.getAllProducts();
         for (int i = 0; i < products.size(); i++) {

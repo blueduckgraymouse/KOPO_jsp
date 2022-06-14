@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
@@ -29,6 +31,19 @@
     <div class="text-center">
       <h3>Welcome to Web market!</h3>
       현재 접속 시간 : <%= format.format(now) %> 
+      <%
+      	/* 세션 실습 */
+        //session.setAttribute("name", "임현덕");
+        //session.setAttribute("age", "30");
+        
+        List<String> foods = new ArrayList<>();
+        foods.add("백반");
+        foods.add("햄버거");
+        foods.add("고기");
+        session.setAttribute("foods", foods);
+        
+        session.setMaxInactiveInterval(10);
+      %>
     </div>
   </div>
   
