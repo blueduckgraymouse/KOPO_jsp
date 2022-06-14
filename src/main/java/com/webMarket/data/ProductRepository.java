@@ -17,7 +17,7 @@ public class ProductRepository {
 	// 3. 생성자 막기 (private)
 	private static ProductRepository instance = new ProductRepository();
 	
-	public static ProductRepository getInstatnce() {
+	public static ProductRepository getInstance() {
 		return instance;
 	}
 	
