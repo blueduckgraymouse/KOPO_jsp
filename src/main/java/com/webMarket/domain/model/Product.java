@@ -31,6 +31,10 @@ public class Product implements Serializable {		//	Serializable implements 생�
 	private long unitsInStock;	// 재고 수
 	private String condition;	// 신상품 or 중고품 or 재생품
 	
+	public Product() {
+		
+	}
+	
 	public Product(String id, String name, int unitPrice) {
 		super();
 		this.id = id;
