@@ -1,27 +1,25 @@
 package com.webMarket.data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 import com.webMarket.domain.model.Product;
+import com.webMarket.domain.repository.ProductRepository;
 
-public class ProductRepository {
+public class ProductRepositoryImpl implements ProductRepository {
 	private List<Product> products = new ArrayList<>();	
 	
 	// 싱글턴 패턴
 	// 1. static 인스턴스 준비
 	// 2. static 메서드로 인스턴스 리턴 (getInstance() 이름을 주로 씀)
 	// 3. 생성자 막기 (private)
-	private static ProductRepository instance = new ProductRepository();
+	private static ProductRepositoryImpl instance = new ProductRepositoryImpl();
 	
-	public static ProductRepository getInstance() {
+	public static ProductRepositoryImpl getInstance() {
 		return instance;
 	}
 	
-	private ProductRepository() {		// 생성자를 private로 변경, static인 instance를 이용하도록 유도 -> "singleton pattern"
+	private ProductRepositoryImpl() {		// 생성자를 private로 변경, static인 instance를 이용하도록 유도 -> "singleton pattern"
 		Product phone = new Product("P1234", "iPhone 6s", 800000);
 		phone.setDescription("4.7-inch, 1334X750 Renina HD display, 8-megapixel iSight Camera");
 		phone.setCategory("Smart Phone");
@@ -46,10 +44,9 @@ public class ProductRepository {
 		products.add(phone);
 		products.add(notebook);
 		products.add(tablet);
-		
-
 	}
 
+	@Override
 	public List<Product> getAllProducts() {
 		return products;
 	}
@@ -67,6 +64,7 @@ public class ProductRepository {
 //		}
 //	}
 //	=>	
+	@Override
 	public Product getProductById(String id) {
 		// List를 stream(데이터의 흐름)으로 변환
 		return products.stream()
@@ -75,13 +73,11 @@ public class ProductRepository {
 			.get();			// 얻어
 	}
 	
+	@Override
 	public void addProduct(Product product) {
 		products.add(product);
 	}
 
-	
-	
-	
 //	public static void main(String[] args) {
 //        // 삽입, 삭제가 빈번할 때 항상 동일 성능, but ArrayList보다 검색이 느려
 //        // 메모리 조금 더 많이 먹어
