@@ -2,9 +2,11 @@ package com.webMarket.domain.repository;
 
 import java.util.List;
 
+import com.webMarket.data.ProductRepositoryDbImpl;
 import com.webMarket.data.ProductRepositoryImpl;
+import com.webMarket.data.dao.MysqlProductDaoImpl;
+import com.webMarket.data.dao.ProductDao;
 import com.webMarket.domain.model.Product;
-
 
 /*
  * view인 products.jsp에서
@@ -23,10 +25,21 @@ public interface ProductRepository {
 	 * 오직 추상메서드와 상수만을 맴버로 갖는다. (static, default 제외)
 	 * 인터페이스의 모든 메서드의 default는 public static 
 	 */
-	public static ProductRepository getInstance() {	// 인터페이스이므로 구현부를 작성하지 않는게 맞다.
-		return ProductRepositoryImpl.getInstance();	// 하지만 싱글톤패턴을 위해 static으로 선언해야하고 
-	}												// static은 추상메서드에 사용할 수 없으므로 임시로
-													// 메서드를 구현해야 한다.
+//	public static ProductRepository getInstance() {	// 인터페이스이므로 구현부를 작성하지 않는게 맞다.
+//		return ProductRepositoryImpl.getInstance();	// 하지만 싱글톤패턴을 위해 static으로 선언해야하고 
+//	}												// static은 추상메서드에 사용할 수 없으므로 임시로
+//													// 메서드를 구현해야 한다.
+
+	public static ProductRepository getInstance() {	
+		/* repository 구현(2) */
+		ProductDao dao = new MysqlProductDaoImpl();	// mysql DBMS에 접속하여 DB를 사용하는 두번째 방법
+		//ProductDao dao = new OracleProductDaoImpl();	// DBMS를 mysql 대신 orcle을 사용한다고 가정했을 때.
+		return new ProductRepositoryDbImpl(dao);
+		
+		/* repository 구현(1) */
+		//return ProductRepositoryImpl.getInstance(); // repository 객체를 static으로 메모리에 올려서 사용하는 첫번째 방법
+	}												
+	// 메서드를 구현해야 한다.
 	public List<Product> getAllProducts();
 	
 	public Product getProductById(String id);

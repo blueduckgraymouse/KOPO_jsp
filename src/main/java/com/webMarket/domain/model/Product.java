@@ -1,6 +1,5 @@
 package com.webMarket.domain.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 // 1. private 맴버 변수
@@ -8,20 +7,7 @@ import java.util.Objects;
 // 3. getter / setter
 // 4. toString()
 // 5. 추가) equals / haseCode 재정의 (오버라이드)
-public class Product implements Serializable {		//	Serializable implements 생략 가능
-	//    public static void main(String[] args) {
-	//        Product product = new Product("33", "33", 11);
-	//        System.out.println(product.hashCode());
-	//
-	//        Product product2 = new Product("33", "33", 11);
-	//        System.out.println(product2.hashCode());
-	//
-	//        Object object = new Product("33", "33", 11);
-	//
-	//        System.out.println(product.equals(product2)); // true
-	//        System.out.println(product.hashCode() == product2.hashCode()); // true
-	//        System.out.println(product == product2); // false
-	//    }
+public class Product {	//	Serializable implements 생략 가능 - beans사용시 필요
 	private String id;	// 상품 아이디
 	private String name;		// 상품 명
 	private int unitPrice;		// 상품 가격
