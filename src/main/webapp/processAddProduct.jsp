@@ -1,9 +1,9 @@
+<%@page import="com.webMarket.domain.repository.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.webMarket.data.ProductRepository" %>
 <%@ page import="com.webMarket.domain.model.Product" %>
 <%
-  	// 한글깨짐 처리 - java버전에 따라 필요하다
+// 한글깨짐 처리 - java버전에 따라 필요하다
   	request.setCharacterEncoding("UTF-8");
 
   	//Post로 넘어온 것

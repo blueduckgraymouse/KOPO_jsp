@@ -1,9 +1,9 @@
+<%@page import="com.webMarket.domain.repository.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.webMarket.domain.model.Product"%>
-<%@ page import="com.webMarket.data.ProductRepository"%>
 <!DOCTYPE html>
 <html>
 
@@ -31,10 +31,10 @@
   </div>
   
   <%
-  	ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
-  	String id = request.getParameter("id");
-  	Product product = repository.getProductById(id);
-  %>
+    	ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
+      	String id = request.getParameter("id");
+      	Product product = repository.getProductById(id);
+    %>
   
   <div class="container">
     <div class="col-md-6">

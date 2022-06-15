@@ -1,9 +1,9 @@
+<%@page import="com.webMarket.domain.repository.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.webMarket.domain.model.Product"%>
-<%@ page import="com.webMarket.data.ProductRepository"%>
 <!DOCTYPE html>
 <html>
 
@@ -31,15 +31,18 @@
   <div class="container">
     <div class="row" align="center">
       <%
-      	/* 세션 실습 */
-      	//String name = (String)session.getAttribute("name");
-      	//String age = (String)session.getAttribute("age");
-      	//out.println(name + "," + age);
-      	out.println(session.getAttribute("foods"));
-      	
-      	ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
-        List<Product> products = repository.getAllProducts();
-        for (int i = 0; i < products.size(); i++) {
+      /* 세션 실습 */
+          //String name = (String)session.getAttribute("name");
+          //String age = (String)session.getAttribute("age");
+          //out.println(name + "," + age);
+          //out.println(session.getAttribute("foods"));
+            	
+          //ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
+          //List<Product> products = repository.getAllProducts();
+          
+          //List<Product> products = (List<Product>)session.getAttribute("products");	// mvc패턴2
+          List<Product> products = (List<Product>)request.getAttribute("products");
+          for (int i = 0; i < products.size(); i++) {
       %>
         <div class="col-md-4">
           <h3><%= products.get(i).getName() %></h3>
