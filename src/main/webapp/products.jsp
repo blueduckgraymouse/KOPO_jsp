@@ -40,8 +40,7 @@
           //ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
           //List<Product> products = repository.getAllProducts();
           
-          //List<Product> products = (List<Product>)session.getAttribute("products");	// mvc패턴2
-          List<Product> products = (List<Product>)request.getAttribute("products");
+          List<Product> products = (List<Product>)request.getAttribute("products");		// mvc패턴2
           for (int i = 0; i < products.size(); i++) {
       %>
         <div class="col-md-4">
