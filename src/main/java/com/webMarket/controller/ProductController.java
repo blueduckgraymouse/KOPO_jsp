@@ -19,17 +19,17 @@ public class ProductController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			ProductRepository repository = ProductRepository.getInstance();		// 싱글톤 패턴
-	        List<Product> products = repository.getAllProducts();
-	        
-	        req.setAttribute("products", products);
-	        req.getRequestDispatcher("products.jsp").forward(req, resp);
+		ProductRepository repository = ProductRepository.getInstance();
+		List<Product> products = repository.getAllProducts();
+		
+		req.setAttribute("products", products);
+		req.getRequestDispatcher("products.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
+	
 	  	//Post로 넘어온 것
 		String productId = req.getParameter("productId");
 		String name = req.getParameter("name");
@@ -39,9 +39,9 @@ public class ProductController extends HttpServlet {
 		String category = req.getParameter("category");
 		String unitsInStock = req.getParameter("unitsInStock");
 		String condition = req.getParameter("condition");
-
+	
 		ProductRepository dao = ProductRepository.getInstance();
-
+	
 		Product newProduct = new Product();
 		
 		newProduct.setId(productId);
@@ -52,9 +52,11 @@ public class ProductController extends HttpServlet {
 		newProduct.setCategory(category);
 		newProduct.setUnitsInStock(Long.valueOf(unitsInStock));
 		newProduct.setCondition(condition);
-
-		dao.addProduct(newProduct);
+	
+		dao.addProduct(newProduct);		// DB insert 메서드
 		
-		req.getRequestDispatcher("products.do").forward(req, resp);	// 의도는 post들어온거 insert 후 get으로 products.do 호출, 그러나 다시 post로 들어옴.
+		//req.getRequestDispatcher("/products.do").forward(req, resp);	// 의도는 post들어온거 insert 후 get으로 products.do 호출, 그러나 다시 post로 들어옴.
+																		// 서블릿으로 들어온 request가 그대로 포워드 되버린다.
+		resp.sendRedirect(req.getContextPath() + "/products.do");
 	}
 }
